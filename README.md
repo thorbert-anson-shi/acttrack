@@ -68,7 +68,8 @@ uv run granian --interface asgi --host 0.0.0.0 --port 8000 main:app
 
 ### Using the pre-built container image
 
-> [!IMPORTANT] Right now, authentication to `tbcr.tobtoby.net` is incomplete.
+> [!IMPORTANT]
+> Right now, authentication to `tbcr.tobtoby.net` is incomplete.
 > The following docs are preemptively made for when the registry is ready. If
 > you're looking to run the application, please refer to
 > [[#Running the FastAPI application]].
