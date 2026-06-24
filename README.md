@@ -1,6 +1,7 @@
 # acttrack
 
-A simple activity tracker built on FastAPI and TinyFlux
+A simple activity tracker built on [FastAPI](https://fastapi.tiangolo.com/) and
+[TinyFlux](https://tinyflux.readthedocs.io/en/latest/intro.html)
 
 ---
 
@@ -16,6 +17,13 @@ Keeps a time-series database of activities with the following information:
 
 I made this because I'd like to keep a simple diary of the things I'm doing.
 This is a work in progress, and I am very open to suggestions.
+
+## Notable features
+
+Because `acttrack` uses
+[TinyFlux](https://tinyflux.readthedocs.io/en/latest/intro.html) as a
+time-series database, all data is stored in a single CSV file. This allows for
+simple data backups and migration
 
 ## Usage
 
@@ -36,7 +44,7 @@ uv sync --frozen
 The FastAPI application reads the shell environment and any .env files for the
 following variables:
 
-1. TZ_ZONEINFO: The human-readable name for the desired IANA timezone (i.e.
+1. `TZ_ZONEINFO`: The human-readable name for the desired IANA timezone (i.e.
    Asia/Bangkok).
 
 You can refer to the
@@ -60,8 +68,7 @@ uv run granian --interface asgi --host 0.0.0.0 --port 8000 main:app
 
 ### Using the pre-built container image
 
-> [!IMPORTANT]
-> Right now, authentication to `tbcr.tobtoby.net` is incomplete.
+> [!IMPORTANT] Right now, authentication to `tbcr.tobtoby.net` is incomplete.
 > The following docs are preemptively made for when the registry is ready. If
 > you're looking to run the application, please refer to
 > [[#Running the FastAPI application]].
@@ -69,6 +76,14 @@ uv run granian --interface asgi --host 0.0.0.0 --port 8000 main:app
 The container image defaults to serving the application on port 8000. Use the
 Docker and Podman port forwarding features to expose the application on a
 different port.
+
+To persist activity data, make sure to create a volume mount from your CSV file
+to the in-container /app/db.csv file. For example,
+
+```bash
+# Now ./db.csv on the host device is mounted to the container
+podman run -p 8000:8000 -v ./db.csv:/app/db.csv tbcr.tobtoby.net/acttrack:v1.0
+```
 
 #### Podman
 
