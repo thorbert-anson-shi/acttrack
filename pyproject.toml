@@ -1,0 +1,12 @@
+[project]
+name = "activity-tracker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.138.0",
+    "granian>=2.7.7",
+    "pydantic-settings>=2.14.2",
+    "tinyflux>=1.2.0",
+]
